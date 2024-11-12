@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DKVDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CT_HOA_DON">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HoaDonID" Type="Int32" />
+    <Property Name="SanPhamID" Type="Int32" />
+    <Property Name="SoLuongMua" Type="Int32" />
+    <Property Name="DonGiaMua" Type="Double" />
+    <Property Name="ThanhTien" Type="Double" />
+    <Property Name="TrangThai" Type="Byte" />
+    <NavigationProperty Name="HOA_DON" Relationship="Self.FK__CT_HOA_DO__HoaDo__09A971A2" FromRole="CT_HOA_DON" ToRole="HOA_DON" />
+    <NavigationProperty Name="HINH_NEN" Relationship="Self.FK__CT_HOA_DO__SanPh__0A9D95DB" FromRole="CT_HOA_DON" ToRole="HINH_NEN" />
+  </EntityType>
+  <EntityType Name="HINH_NEN">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MaHinhNen" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="TenHinhNen" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="HinhAnh" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="SoLuong" Type="Int32" />
+    <Property Name="DonGia" Type="Double" />
+    <Property Name="MaLoai" Type="Int32" />
+    <Property Name="TrangThai" Type="Byte" />
+    <NavigationProperty Name="CT_HOA_DON" Relationship="Self.FK__CT_HOA_DO__SanPh__0A9D95DB" FromRole="HINH_NEN" ToRole="CT_HOA_DON" />
+    <NavigationProperty Name="LOAI_HINH_NEN" Relationship="Self.FK__HINH_NEN__MaLoai__7E37BEF6" FromRole="HINH_NEN" ToRole="LOAI_HINH_NEN" />
+  </EntityType>
+  <EntityType Name="HOA_DON">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MaHoaDon" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="MaKhachHang" Type="Int32" />
+    <Property Name="NgayHoaDon" Type="DateTime" Precision="3" />
+    <Property Name="NgayNhan" Type="DateTime" Precision="3" />
+    <Property Name="HoTenKhachHang" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="DienThoai" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="DiaChi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="TongTriGia" Type="Double" />
+    <Property Name="TrangThai" Type="Byte" />
+    <NavigationProperty Name="CT_HOA_DON" Relationship="Self.FK__CT_HOA_DO__HoaDo__09A971A2" FromRole="HOA_DON" ToRole="CT_HOA_DON" />
+    <NavigationProperty Name="KHACH_HANG" Relationship="Self.FK__HOA_DON__MaKhach__06CD04F7" FromRole="HOA_DON" ToRole="KHACH_HANG" />
+  </EntityType>
+  <EntityType Name="KHACH_HANG">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MaKhachHang" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="HoTenKhachHang" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="MatKhau" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="DienThoai" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="DiaChi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="NgayDangKy" Type="DateTime" Precision="3" />
+    <Property Name="TrangThai" Type="Byte" />
+    <NavigationProperty Name="HOA_DON" Relationship="Self.FK__HOA_DON__MaKhach__06CD04F7" FromRole="KHACH_HANG" ToRole="HOA_DON" />
+  </EntityType>
+  <EntityType Name="LOAI_HINH_NEN">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MaLoai" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="TenLoai" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="TrangThai" Type="Byte" />
+    <NavigationProperty Name="HINH_NEN" Relationship="Self.FK__HINH_NEN__MaLoai__7E37BEF6" FromRole="LOAI_HINH_NEN" ToRole="HINH_NEN" />
+  </EntityType>
+  <EntityType Name="QUAN_TRI">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TaiKhoan" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="MatKhau" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="TrangThai" Type="Byte" />
+  </EntityType>
+  <Association Name="FK__CT_HOA_DO__HoaDo__09A971A2">
+    <End Role="HOA_DON" Type="Self.HOA_DON" Multiplicity="0..1" />
+    <End Role="CT_HOA_DON" Type="Self.CT_HOA_DON" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HOA_DON">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CT_HOA_DON">
+        <PropertyRef Name="HoaDonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CT_HOA_DO__SanPh__0A9D95DB">
+    <End Role="HINH_NEN" Type="Self.HINH_NEN" Multiplicity="0..1" />
+    <End Role="CT_HOA_DON" Type="Self.CT_HOA_DON" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HINH_NEN">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CT_HOA_DON">
+        <PropertyRef Name="SanPhamID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HINH_NEN__MaLoai__7E37BEF6">
+    <End Role="LOAI_HINH_NEN" Type="Self.LOAI_HINH_NEN" Multiplicity="0..1" />
+    <End Role="HINH_NEN" Type="Self.HINH_NEN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LOAI_HINH_NEN">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="HINH_NEN">
+        <PropertyRef Name="MaLoai" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HOA_DON__MaKhach__06CD04F7">
+    <End Role="KHACH_HANG" Type="Self.KHACH_HANG" Multiplicity="0..1" />
+    <End Role="HOA_DON" Type="Self.HOA_DON" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KHACH_HANG">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="HOA_DON">
+        <PropertyRef Name="MaKhachHang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DKVDbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CT_HOA_DON" EntityType="Self.CT_HOA_DON" />
+    <EntitySet Name="HINH_NEN" EntityType="Self.HINH_NEN" />
+    <EntitySet Name="HOA_DON" EntityType="Self.HOA_DON" />
+    <EntitySet Name="KHACH_HANG" EntityType="Self.KHACH_HANG" />
+    <EntitySet Name="LOAI_HINH_NEN" EntityType="Self.LOAI_HINH_NEN" />
+    <EntitySet Name="QUAN_TRI" EntityType="Self.QUAN_TRI" />
+    <AssociationSet Name="FK__CT_HOA_DO__HoaDo__09A971A2" Association="Self.FK__CT_HOA_DO__HoaDo__09A971A2">
+      <End Role="HOA_DON" EntitySet="HOA_DON" />
+      <End Role="CT_HOA_DON" EntitySet="CT_HOA_DON" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CT_HOA_DO__SanPh__0A9D95DB" Association="Self.FK__CT_HOA_DO__SanPh__0A9D95DB">
+      <End Role="HINH_NEN" EntitySet="HINH_NEN" />
+      <End Role="CT_HOA_DON" EntitySet="CT_HOA_DON" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HINH_NEN__MaLoai__7E37BEF6" Association="Self.FK__HINH_NEN__MaLoai__7E37BEF6">
+      <End Role="LOAI_HINH_NEN" EntitySet="LOAI_HINH_NEN" />
+      <End Role="HINH_NEN" EntitySet="HINH_NEN" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HOA_DON__MaKhach__06CD04F7" Association="Self.FK__HOA_DON__MaKhach__06CD04F7">
+      <End Role="KHACH_HANG" EntitySet="KHACH_HANG" />
+      <End Role="HOA_DON" EntitySet="HOA_DON" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

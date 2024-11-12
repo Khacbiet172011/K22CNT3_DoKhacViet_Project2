@@ -1,0 +1,180 @@
+﻿@model IEnumerable<K22CNT3_DoKhacViet_Project2.Models.DKVCartItem>
+
+@{ ViewBag.Title = "Thong tin thanh toan"; }
+@using (Html.BeginForm("ThanhToan", "DKVCart", FormMethod.Post))
+{
+
+<form action="ThanhToan" method="post">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card w-100">
+                <div class="card-header">
+                    <h2>Thông tin người nhận</h2>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3 row">
+                        <label for="HoTenKhachHang" class="col-sm-4 col-form-label">
+                            Họ tên người nhận
+                        </label>
+                        <div class="col-sm-8">
+                            <input type="text" id="HoTenKhachHang" class="form-control" name="HoTenKhachHang" />
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="Email" class="col-sm-4 col-form-label">
+                            Email người nhận
+                        </label>
+                        <div class="col-sm-8">
+                            <input type="email" id="Email" class="form-control" name="Email" />
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="DienThoai" class="col-sm-4 col-form-label">
+                            Điện thoại người nhận
+                        </label>
+                        <div class="col-sm-8">
+                            <input type="text" id="DienThoai" class="form-control" name="DienThoai" />
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="DiaChi" class="col-sm-4 col-form-label">
+                            Địa chỉ người nhận
+                        </label>
+                        <div class="col-sm-8">
+                            <textarea rows="2" id="DiaChi" name="DiaChi" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+            <div class="card w-100">
+                <div class="card-header">
+                    <h2>Thông tin hóa đơn</h2>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3 row">
+                        <label for="MaHoaDon" class="col-sm-4 col-form-label">
+                            Mã Hóa Đơn
+                        </label>
+                        <div class="col-sm-8">
+                            <input type="text" readonly id="MaHoaDon" class="form-control" name="MaHoaDon"
+                                   value="@ViewBag.MaHoaDon" />
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="KhachHangID" class="col-sm-4 col-form-label">
+                            Mã Khách Đặt
+                        </label>
+                        <div class="col-sm-8">
+                            <input type="text" readonly id="KhachHangID" class="form-control" name="KhachHangID" />
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="NgayHoaDon" class="col-sm-4 col-form-label">
+                            Ngày Đặt
+                        </label>
+                        <div class="col-sm-8">
+                            <input type="date" id="NgayHoaDon" class="form-control" name="NgayHoaDon" />
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="NgayNhan" class="col-sm-4 col-form-label">
+                            Ngày Nhận (Dự Kiến)
+                        </label>
+                        <div class="col-sm-8">
+                            <input type="date" id="NgayNhan" class="form-control" name="NgayNhan" />
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="TongTriGia" class="col-sm-4 col-form-label">
+                            Trị Giá Hóa Đơn
+                        </label>
+                        <div class="col-sm-8">
+                            <input type="number" readonly id="TongTriGia"
+                                   class="form-control" value="@ViewBag.TongTriGia" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="card my-3">
+            <div class="card-header">
+                <h2>Chi tiết đơn hàng</h2>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ID)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TenHinhNen)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.HinhAnh)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.SoLuongMua)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DonGiaMua)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ThanhTien)
+                            </th>
+                            <th>Chuc nang</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenHinhNen)
+            </td>
+            <td>
+                <img src="@Url.Content("~/" + item.HinhAnh)" style="width:50px" alt="@item.TenHinhNen">
+            </td>
+            <td>
+                <label class="badge">@item.SoLuongMua</label>
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.DonGiaMua)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThanhTien)
+            </td>
+
+        </tr>}
+                    </tbody>
+
+                </table>
+            </div>
+            <div class="card-footer">
+                <h2>Tong tri gia: @ViewBag.TongTriGia USD </h2>
+            </div>
+        </div>
+        <button class="btn btn-outline-primary">Thanh toan</button>
+    </div>
+
+
+</form>}

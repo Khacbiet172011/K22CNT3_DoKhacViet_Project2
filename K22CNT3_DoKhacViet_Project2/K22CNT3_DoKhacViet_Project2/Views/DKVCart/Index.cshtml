@@ -1,0 +1,97 @@
+﻿@model IEnumerable<K22CNT3_DoKhacViet_Project2.Models.DKVCartItem>
+
+@{
+    ViewBag.Title = "Thong tin gio hang";
+}
+
+@using (Html.BeginForm("UpdateFromCart", "DKVCart"))
+{
+
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ID)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TenHinhNen)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.HinhAnh)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SoLuongMua)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DonGiaMua)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ThanhTien)
+                        </th>
+                        <th>Chuc nang</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <input type="hidden" name="ID" value="@item.ID" />
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TenHinhNen)
+                            </td>
+                            <td>
+                                <img src="@item.HinhAnh" style="width:50px" alt="@item.TenHinhNen">
+                            </td>
+                            <td>
+                                <input type="number" name="SoLuongMua" id="SoLuongMua" data-id="@item.ID"
+                                       value="@item.SoLuongMua" style="width:50px;" />
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DonGiaMua)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ThanhTien)
+                            </td>
+                            <td>
+                                <a href="/dkvcart/UpdateItemCart?id=@item.ID&qty=@item.SoLuongMua"
+                                   class="btn btn-outline-success update">
+                                    Cập nhật
+                                </a>
+
+                                <a href="/dkvcart/DeleteItemCart?id=@item.ID" class="btn btn-outline-danger">Xóa</a>
+
+                            </td>
+
+                        </tr>
+
+                    }
+                </tbody>
+
+            </table>
+            <a href="/DKVCart/ThongTinThanhToan" class="btn btn-outline-success">Thanh toan</a>
+            <button class="btn btn-outline-primary mx-2">Cap nhat gio hang</button>
+        </div>
+    </div>
+}
+
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("input[type='number']").change(function () {
+                let id = $(this).attr("data-id");
+                let qty = $(this).val();
+                // tao link update
+                let url = "/dkvcart/UpdateItemCart?id=" + id + "&qty=" + qty;
+                $(this).parent().siblings("td").children("a.update").attr("href", url);
+            });
+        });
+    </script>
+}

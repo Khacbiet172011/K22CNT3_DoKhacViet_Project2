@@ -1,0 +1,24 @@
+﻿@model IEnumerable<K22CNT3_DoKhacViet_Project2.Models.HINH_NEN>
+
+@{
+    ViewBag.Title = "Danh sach hinh nen";
+}
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3">
+            <div class="card w-100">
+                <img src="@item.HinhAnh" class="card-img-top" alt="@item.TenHinhNen">
+                <div class="card-body">
+                    <h5 class="card-title">@item.TenHinhNen</h5>
+                    <p>Gia: <span class="text-danger">@item.DonGia.Value.ToString("#,##0")</span></p>
+                    <a href="/DKVCart/AddToCart?id=@item.ID&TenGame=@item.TenHinhNen&HinhAnh=@item.HinhAnh&SoLuongMua=1&DonGiaMUa=@item.DonGia"
+                       class="btn btn-primary">
+                        Mua hang
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
